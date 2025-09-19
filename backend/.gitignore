@@ -1,0 +1,9 @@
+# --- Node.js / Backend ---
+node_modules/
+.env
+package-lock.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
