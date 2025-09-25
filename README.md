@@ -23,3 +23,10 @@ servidor correrá en:http://localhost:3000
 4. **Frontend**
 ```cd frontend npm install npm run dev ```
 Servidor disponible en:http://localhost:5173
+*** Variable de entorno***
+El proyecto utiliza variables de entorno en el backend
+se debe crear archivo .env en la carpeta /backend antes de iniciar servidor
+
+PORT=0000
+MONGODB_URI=DIRECCION
+
