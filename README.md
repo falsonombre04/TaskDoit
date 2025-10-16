@@ -30,3 +30,8 @@ se debe crear archivo .env en la carpeta /backend antes de iniciar servidor
 PORT=0000
 MONGODB_URI=DIRECCION
 
+5. **Rutas de la API (endPoints)**
+**Base URL:** http://localhost:3000/tasks
+
+**GET /tasks**
+Obtiene todas las tareas
