@@ -8,6 +8,7 @@ const connectDB = require("./config/db"); // conexión con la BBDD
 const PORT = process.env.PORT;
 const MONGO_URI =  process.env.MONGO_URI;
 
+app.use(express.json())
 
 app.use("/tasks",router); // Establecemos la ruta principal
 
