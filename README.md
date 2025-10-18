@@ -35,3 +35,12 @@ MONGODB_URI=DIRECCION
 
 **GET /tasks**
 Obtiene todas las tareas
+```
+[
+    {
+        "_id":"xxx",
+        "task":"lavar los platos"
+    }
+]
+```
+**POST /tasks**
