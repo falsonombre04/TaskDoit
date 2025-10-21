@@ -27,3 +27,5 @@ const main = async (URI)=>{ // función que ejecutara el servidor
 
 main(MONGO_URI);
 
+module.exports = app;
+
