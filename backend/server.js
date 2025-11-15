@@ -1,17 +1,10 @@
-// paquetes de nodejs
-const express = require("express");
-const app =  express(); 
+// importamos el archivo app
 const dotenv =  require("dotenv").config();
-const router = require("./routes/index"); // accedemos a los endpoint desde server.js
 const connectDB = require("./config/db"); // conexión con la BBDD
+const app =  require("./app.js"); 
 // Variables de entorno
 const PORT = process.env.PORT;
 const MONGO_URI =  process.env.MONGO_URI;
-
-app.use(express.json())
-
-app.use("/tasks",router); // Establecemos la ruta principal
-
 
 const main = async (URI)=>{ // función que ejecutara el servidor
     try{

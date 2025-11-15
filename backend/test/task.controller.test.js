@@ -1,4 +1,5 @@
 const request = require("supertest");
+const mongoose = require("mongoose")
 const app = require("../server");
 
 jest.mock("../model/TaskModel", () => ({

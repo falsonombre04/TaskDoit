@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const {createTask} = require("../controller/taksController");
+const {createTask,
+    getTasks
+} = require("../controller/taksController");
 
-router.get("/",(req,res)=>{
-    res.send("Desde otra ruta......");
-});
+//Obtener tareas 
+router.get("/",getTasks);
 
 //crear task
 router.post("/",createTask);
