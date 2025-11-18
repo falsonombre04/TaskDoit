@@ -1,6 +1,6 @@
 const request = require("supertest");
 const mongoose = require("mongoose")
-const app = require("../server");
+const app = require("../app");
 
 jest.mock("../model/TaskModel", () => ({
   create: jest.fn(() => {
@@ -9,7 +9,7 @@ jest.mock("../model/TaskModel", () => ({
 }));
 
 describe("API /tasks (Prueba unitaria con mock)", () => {
-  it("Debería devolver 500 si ocurre un error interno", async () => {
+  test("Debería devolver 500 si ocurre un error interno", async () => {
     const res = await request(app)
       .post("/tasks")
       .send({ task: "Test de error" });

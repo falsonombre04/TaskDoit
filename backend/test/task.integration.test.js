@@ -14,8 +14,15 @@ describe("API de task",()=>{
             expect(res.statusCode).toBe(201);
         })
     })
+    describe("/task-GET",()=>{
+        test("Debe consultar todas las tareas", async ()=>{
+            const res = await request(app).get("/tasks")
+            expect(res.statusCode).toBe(200);
+            expect(Array.isArray(res.body.tasks)).toBe(true);
+            expect(res.body.length).toBe(0);
+        })
+    })
 });
-
 
 /*
 //ejemplo basico de la simulación
