@@ -14,10 +14,32 @@ const createTask = async(req,res)=>{
 const getTasks = async(req,res)=>{
     try{
         const tasks = await TaskModel.find();
-        res.status(200).json({tasks})
+        res.status(200).json({tasks});
     }catch(error){
         res.status(500).json({
             error:'Error en obtener tareas'
+        })
+    }
+}
+
+const getTask = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const task = await TaskModel.findById(id);
+        if(!task){
+            return res.status(404).json({
+                ok:false,
+                message:"tarea no existe en el sistema"
+            })
+        }
+        res.status(200).json({
+            ok:true,
+            task
+        })
+    }catch(error){
+        res.status(500).json({
+            ok:false,
+            error:'Error en obtener la tarea solicitada'
         })
     }
 }
