@@ -36,11 +36,35 @@ MONGODB_URI=DIRECCION
 **GET /tasks**
 Obtiene todas las tareas
 ```
-[
-    {
-        "_id":"xxx",
-        "task":"lavar los platos"
-    }
-]
+{
+    "tasks":[
+        {
+            "_id": "68f2f8ce5b7453180991b559",
+			"task": "Lavar ropa",
+			"createdAt": "2025-10-18T02:17:50.106Z",
+			"updatedAt": "2025-10-18T02:17:50.106Z",
+			"__v": 0
+        }
+    ]
+}
 ```
 **POST /tasks**
+Crear una nueva tarea
+**Body:**
+```
+{
+    task:"preparar el desayuno"
+}
+```
+**Respuesta:**
+```
+    {
+        task:{
+           "_id": "6913ec358febc8c30c28cafd",
+			"task": "Preparar el desayuno",
+			"createdAt": "2025-11-12T02:08:53.853Z",
+			"updatedAt": "2025-11-12T02:08:53.853Z",
+			"__v": 0 
+        }
+    }
+```

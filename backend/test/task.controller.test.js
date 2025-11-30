@@ -17,4 +17,10 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
     expect(res.statusCode).toBe(500);   
     expect(res.body).toHaveProperty("error", "Error en la creación de tarea");
   });
+  describe("Get /tasks",()=>{
+    test("Debe devolver 500 si falla la consulta de tasks",async ()=>{
+      const res = await request(app).get("/tasks");
+      expect(res.statusCode).toBe(500);
+    })
+  })
 });
