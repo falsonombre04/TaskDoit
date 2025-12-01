@@ -46,5 +46,6 @@ const getTask = async (req,res)=>{
 
 module.exports = {
     createTask,
-    getTasks
+    getTasks,
+    getTask
 }
