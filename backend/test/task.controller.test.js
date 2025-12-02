@@ -23,4 +23,11 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
       expect(res.statusCode).toBe(500);
     })
   })
+  describe("Get /tasks/task/:id",()=>{
+    test("Deberia devolver 500 si falla la consulta de task/:id",async ()=>{
+      const res = await  request(app).get("/tasks/task/6913ec358febc8c30c28cafd");
+      expect(res.statusCode).toBe(500);
+
+    })
+  })
 });
