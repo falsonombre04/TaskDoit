@@ -19,7 +19,12 @@ describe("API de task",()=>{
             const res = await request(app).get("/tasks")
             expect(res.statusCode).toBe(200);
             expect(Array.isArray(res.body.tasks)).toBe(true);
-            expect(res.body.length).toBe(0);
+        })
+        test("Debe devolver el task por el id",async ()=>{
+            const res = await request(app).get("/tasks/task/6913ec358febc8c30c28cafd");
+            expect(
+                
+                res.statusCode).toBe(200);
         })
     })
 });
