@@ -26,7 +26,9 @@ const getTask = async (req,res)=>{
     try{
         const {id} = req.params;
         const task = await TaskModel.findById(id);
+        console.log("por aca")
         if(!task){
+            console.log("paso por aca")
             return res.status(404).json({
                 ok:false,
                 message:"tarea no existe en el sistema"

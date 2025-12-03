@@ -1,11 +1,16 @@
 const request = require("supertest");
 const mongoose = require("mongoose")
 const app = require("../app");
+const { findById } = require("../model/TaskModel");
 
 jest.mock("../model/TaskModel", () => ({
   create: jest.fn(() => {
     throw new Error("Error simulado");
   }),
+  findById:jest.fn((id)=>{
+    if(id === "2324343") return null;
+    throw new Error("Error simulado en findById()");
+  })
 }));
 
 describe("API /tasks (Prueba unitaria con mock)", () => {
@@ -26,8 +31,13 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
   describe("Get /tasks/task/:id",()=>{
     test("Deberia devolver 500 si falla la consulta de task/:id",async ()=>{
       const res = await  request(app).get("/tasks/task/6913ec358febc8c30c28cafd");
+      console.log(res.statusCode)
       expect(res.statusCode).toBe(500);
 
+    })
+    test("Deberia devolver 404 si falla la consulta de task/:id",async ()=>{
+      const res = await request(app).get('/tasks/task/2324343');
+      expect(res.statusCode).toBe(404)
     })
   })
 });
