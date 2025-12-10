@@ -10,6 +10,10 @@ jest.mock("../model/TaskModel", () => ({
   findById:jest.fn((id)=>{
     if(id === "2324343") return null;
     throw new Error("Error simulado en findById()");
+  }),
+  findByIdAndUpdate:jest.fn((id)=>{
+    if(id === "6913ec358febc8c30c28cafd3") return null;
+    throw new Error("Error simulado en findByIdAndUpdate")
   })
 }));
 
@@ -35,9 +39,16 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
       expect(res.statusCode).toBe(500);
 
     })
-    test("Deberia devolver 404 si falla la consulta de task/:id",async ()=>{
+    test("Deberia devolver 404 si el id es diferentwe de task/:id",async ()=>{
       const res = await request(app).get('/tasks/task/2324343');
-      expect(res.statusCode).toBe(404)
+      expect(res.statusCode).toBe(400)
+    })
+  })
+  describe("Put /tasks/task/:id",()=>{
+    test("Deberoa devolver 500 si falla la consulta de task:/id",async ()=>{
+      const res = await request(app).put('/tasks/task/6913ec358febc8c30c28cafd');
+      console.log("hola:",res.statusCode)
+      expect(res.statusCode).toBe(500)
     })
   })
 });

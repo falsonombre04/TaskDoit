@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const TaskModel = require("../model/TaskModel");
 
 //creamos una tarea
@@ -25,13 +26,18 @@ const getTasks = async(req,res)=>{
 const getTask = async (req,res)=>{
     try{
         const {id} = req.params;
-        const task = await TaskModel.findById(id);
-        console.log("por aca")
-        if(!task){
-            console.log("paso por aca")
-            return res.status(404).json({
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).json({
                 ok:false,
-                message:"tarea no existe en el sistema"
+                message:"El id enviado NO tiene un formato válido"
+            })
+        }
+        const task = await TaskModel.findById(id);
+        if(!task){
+            console.log("HOla.......")
+            return res.status(400).json({
+                ok:false,
+                message:"id en formato no valido."
             })
         }
         res.status(200).json({
@@ -46,8 +52,35 @@ const getTask = async (req,res)=>{
     }
 }
 
+const updateTasks = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        if(!mongoose.Types.ObjectId.isValid(id)){
+                return res.status(400).json({
+                    ok:false,
+                    error:"formato invalido id"
+                })
+            }
+        const task = await TaskModel.findByIdAndUpdate(id,
+        {task:req.body.task},
+        {new:true});
+        res.status(200).json({
+            ok:true,
+            task
+        })
+    }
+    catch(error){
+        res.status(500).json({
+            ok:false,
+            error:'Error en modificar task'
+        })
+        console.log(error);
+    }
+}
+
 module.exports = {
     createTask,
     getTasks,
-    getTask
+    getTask,
+    updateTasks
 }
