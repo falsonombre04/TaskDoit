@@ -78,9 +78,25 @@ const updateTasks = async (req,res)=>{
     }
 }
 
+const deleteTaskById = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const task = await TaskModel.findByIdAndDelete(id);
+        res.status(200).json({
+            ok:true,
+            message:"Tarea eliminada"
+        })
+    } catch(error){
+        res.status(500).json({
+            ok:false,
+            message:"Error en eliminar tarea"
+        })
+    }
+}
 module.exports = {
     createTask,
     getTasks,
     getTask,
-    updateTasks
+    updateTasks,
+    deleteTaskById
 }
