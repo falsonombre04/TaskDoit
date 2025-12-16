@@ -49,7 +49,8 @@ Obtiene todas las tareas
 }
 ```
 **GET /tasks/task/:id**
-***POST /tasks**
+
+**POST /tasks**
 Crear una nueva tarea
 **Body:**
 ```
@@ -68,4 +69,33 @@ Crear una nueva tarea
 			"__v": 0 
         }
     }
+```
+
+**PUT /tasks/:id**
+Modifica una tarea
+**Body:**
+```
+    {
+			"task": "Preparar el desayuno X2", 
+    }
+```
+**Respuesta**
+```
+    {
+        task:{
+           "_id": "6913ec358febc8c30c28cafd",
+			"task": "Preparar el desayuno X2"
+        }
+    }
+```
+**DELETE /tasks/task/:id**
+Elimina tarea
+**Body:**
+
+**Respuesta**
+```
+    {
+	"ok": true,
+	"message": "Tarea eliminada"
+}
 ```
