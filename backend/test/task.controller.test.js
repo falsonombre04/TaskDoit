@@ -14,6 +14,10 @@ jest.mock("../model/TaskModel", () => ({
   findByIdAndUpdate:jest.fn((id)=>{
     if(id === "6913ec358febc8c30c28cafd3") return null;
     throw new Error("Error simulado en findByIdAndUpdate")
+  }),
+  findByIdAndDelete:jest.fn((id)=>{
+    if(id === "6913ec358febc8c30c28cafd3") return null;
+    throw new Error("Error simulado en findByIdAndDelete")
   })
 }));
 
@@ -35,11 +39,10 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
   describe("Get /tasks/task/:id",()=>{
     test("Deberia devolver 500 si falla la consulta de task/:id",async ()=>{
       const res = await  request(app).get("/tasks/task/6913ec358febc8c30c28cafd");
-      console.log(res.statusCode)
       expect(res.statusCode).toBe(500);
 
     })
-    test("Deberia devolver 404 si el id es diferentwe de task/:id",async ()=>{
+    test("Deberia devolver 400 si el id es diferentwe de task/:id",async ()=>{
       const res = await request(app).get('/tasks/task/2324343');
       expect(res.statusCode).toBe(400)
     })
@@ -47,8 +50,17 @@ describe("API /tasks (Prueba unitaria con mock)", () => {
   describe("Put /tasks/task/:id",()=>{
     test("Deberoa devolver 500 si falla la consulta de task:/id",async ()=>{
       const res = await request(app).put('/tasks/task/6913ec358febc8c30c28cafd');
-      console.log("hola:",res.statusCode)
       expect(res.statusCode).toBe(500)
+    })
+  })
+  describe("Delete /tasks/task/:id",()=>{
+    test("Deberia devolver 500 si falla el eliminar consulta de task/:id",async ()=>{
+      const res = await request(app).delete("/tasks/task/6913ec358febc8c30c28cafd");
+      expect(res.statusCode).toBe(500);
+    })
+    test("Deberia devolver 400 si el formato id no es valido",async ()=>{
+      const res = await request(app).delete("/tasks/task/123");
+      expect(res.statusCode).toBe(400);
     })
   })
 });

@@ -48,7 +48,8 @@ Obtiene todas las tareas
     ]
 }
 ```
-**POST /tasks**
+**GET /tasks/task/:id**
+***POST /tasks**
 Crear una nueva tarea
 **Body:**
 ```

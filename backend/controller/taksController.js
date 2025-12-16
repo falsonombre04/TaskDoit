@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, mongo } = require("mongoose");
 const TaskModel = require("../model/TaskModel");
 
 //creamos una tarea
@@ -34,7 +34,6 @@ const getTask = async (req,res)=>{
         }
         const task = await TaskModel.findById(id);
         if(!task){
-            console.log("HOla.......")
             return res.status(400).json({
                 ok:false,
                 message:"id en formato no valido."
@@ -74,14 +73,25 @@ const updateTasks = async (req,res)=>{
             ok:false,
             error:'Error en modificar task'
         })
-        console.log(error);
     }
 }
 
 const deleteTaskById = async (req,res)=>{
     try{
         const {id} = req.params;
+        if(!mongoose.Types.ObjectId.isValid(id)){
+           return  res.status(400).json({
+                ok:false,
+                message:"formato id invalido"
+            })
+        }
         const task = await TaskModel.findByIdAndDelete(id);
+        if(!task){
+            return res.status(404).json({
+               ok:false,
+               message:"no se encontro tarea" 
+            })
+        }
         res.status(200).json({
             ok:true,
             message:"Tarea eliminada"
