@@ -99,3 +99,6 @@ Elimina tarea
 	"message": "Tarea eliminada"
 }
 ```
+
+**Licencia**
+Proyecto de uso educativo y personal
