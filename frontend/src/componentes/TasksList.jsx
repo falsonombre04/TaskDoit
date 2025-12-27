@@ -1,5 +1,9 @@
 
-const TaskList = ({tasks})=>{
+const TaskList = ({tasks,runDelete})=>{
+    const sendId = (id)=>{
+        //getId("mi Mensaje");
+        runDelete(id);
+    }
     return (
         <>
             <table>
@@ -15,7 +19,7 @@ const TaskList = ({tasks})=>{
                             <tr key={index}>
                                 <td>{myTask.task}</td>
                                 <td>
-                                    <button>Eliminar</button>
+                                    <button onClick={()=>(sendId(myTask._id))}>Eliminar</button>
                                     <button>Modificar</button>
                                 </td>
                             </tr>

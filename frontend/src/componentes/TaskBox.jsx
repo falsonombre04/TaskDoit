@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const TaskBox = ()=>{
     const URI = "http://localhost:3000/tasks"
+    const [myId,setMyId] = useState();
     const [taskInput,setTaskInput] = useState("");
     const [task,setTask] = useState("");
 
@@ -21,6 +22,11 @@ const TaskBox = ()=>{
         getTasks();
         setTaskInput("");
     }
+
+    const deleteTask = async (id)=>{
+        await axios.delete(`${URI}/task/${id}`);
+        getTasks();
+    }
     useEffect(()=>{
         getTasks();
     },[])
@@ -32,7 +38,7 @@ const TaskBox = ()=>{
             </div>
             <div className="taskList">
                  {
-                    task.length > 0 && <TaskList tasks={task}/>
+                    task.length > 0 && <TaskList tasks={task} runDelete={deleteTask}/>
                  }
             </div>
         </>
