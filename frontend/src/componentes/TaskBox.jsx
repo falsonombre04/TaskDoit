@@ -8,14 +8,18 @@ const TaskBox = ()=>{
     const [taskInput,setTaskInput] = useState("");
     const [task,setTask] = useState("");
 
-    const addTask = (e)=>{
-        //setTask(taskInput);
-        //console.log(task)
-    }
     const getTasks = async()=>{
         const miTask = await axios.get(`${URI}`);
         setTask(miTask.data.tasks);
         //console.log(miTask.data.tasks)
+    }
+
+    const addTask = async (e)=>{
+        await axios.post(`${URI}`,{
+            task:taskInput
+        })
+        getTasks();
+        setTaskInput("");
     }
     useEffect(()=>{
         getTasks();

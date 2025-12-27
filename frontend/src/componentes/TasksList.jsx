@@ -1,9 +1,5 @@
-import { useEffect } from "react";
 
 const TaskList = ({tasks})=>{
-    useEffect(()=>{
-        console.log("--",tasks)
-    },[])
     return (
         <>
             <table>
