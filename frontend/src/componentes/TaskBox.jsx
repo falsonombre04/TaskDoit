@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const TaskBox = ()=>{
-    const URI = "http://localhost:3000/tasks"
+    const URI = `${import.meta.env.VITE_API_URL}/tasks`
     const [myId,setMyId] = useState();
     const [taskInput,setTaskInput] = useState("");
     const [task,setTask] = useState("");
