@@ -1,9 +1,5 @@
 
-const TaskList = ({tasks,runDelete})=>{
-    const sendId = (id)=>{
-        //getId("mi Mensaje");
-        runDelete(id);
-    }
+const TaskList = ({tasks,runDelete,runUpdate})=>{
     return (
         <>
             <table>
@@ -15,12 +11,12 @@ const TaskList = ({tasks,runDelete})=>{
                 </thead>
                 <tbody>
                     {
-                        tasks.length > 0 && tasks.map((myTask,index)=>(
-                            <tr key={index}>
+                        tasks.length > 0 && tasks.map((myTask)=>(
+                            <tr key={myTask._id}>
                                 <td>{myTask.task}</td>
                                 <td>
-                                    <button onClick={()=>(sendId(myTask._id))}>Eliminar</button>
-                                    <button>Modificar</button>
+                                    <button name="eliminar" onClick={()=>(runDelete(myTask._id))}>Eliminar</button>
+                                    <button name="modificar" onClick={()=>(runUpdate(myTask._id))}>Modificar</button>
                                 </td>
                             </tr>
                         ))

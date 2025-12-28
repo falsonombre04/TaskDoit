@@ -8,6 +8,8 @@ const TaskBox = ()=>{
     const [myId,setMyId] = useState();
     const [taskInput,setTaskInput] = useState("");
     const [task,setTask] = useState("");
+    const [myTask,setMyTask] = useState("");
+    const [idUpdate,setIdUpdate] = useState("");
 
     const getTasks = async()=>{
         const miTask = await axios.get(`${URI}`);
@@ -27,6 +29,19 @@ const TaskBox = ()=>{
         await axios.delete(`${URI}/task/${id}`);
         getTasks();
     }
+
+    const getTask = async (id)=>{
+        setIdUpdate(id);
+        const miTask = await axios.get(`${URI}/task/${id}`);
+        setTaskInput(miTask.data.task.task);
+    }
+    const updateTask = async ()=>{
+        await axios.put(`${URI}/task/${idUpdate}`,{
+            task:taskInput
+        });
+        setTaskInput("");
+        getTasks();
+    }
     useEffect(()=>{
         getTasks();
     },[])
@@ -35,10 +50,11 @@ const TaskBox = ()=>{
             <div>
                 <input placeholder="Ingresa tarea" onChange={(e)=>(setTaskInput(e.target.value))} value={taskInput} name="task"></input>
                 <button onClick={addTask}>Agregar</button>
+                <button onClick={updateTask}>Modificar</button>
             </div>
             <div className="taskList">
                  {
-                    task.length > 0 && <TaskList tasks={task} runDelete={deleteTask}/>
+                    task.length > 0 && <TaskList tasks={task} runDelete={deleteTask} runUpdate={getTask}/>
                  }
             </div>
         </>
